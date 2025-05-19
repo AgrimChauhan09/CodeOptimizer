@@ -41,25 +41,11 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Handle reset button click
     document.getElementById('reset-btn').addEventListener('click', function() {
-        // Get the example code from the page
-        const exampleCode = `
-#include <stdio.h>
-
-int fibonacci(int n) {
-    if (n <= 1)
-        return n;
-    return fibonacci(n-1) + fibonacci(n-2);
-}
-
-int main() {
-    int result = 0;
-    for (int i = 0; i < 20; i++) {
-        result += fibonacci(i);
-    }
-    printf("Result: %d\\n", result);
-    return 0;
-}
-`;
+        // Get the example code from the initial page load
+        // Use the matrix multiplication example that's now set in app.py
+        const exampleCodeElement = document.getElementById('code-editor');
+        const exampleCode = exampleCodeElement.value || exampleCodeElement.textContent;
+        
         codeEditor.setValue(exampleCode.trim());
         hideResults();
         hideError();
@@ -122,14 +108,107 @@ int main() {
         // Show results container
         document.getElementById('results-content').classList.remove('d-none');
         
-        // Display times
+        // Display times and optimization info
         document.getElementById('unoptimized-time').textContent = data.unoptimized_time;
         document.getElementById('optimized-time').textContent = data.optimized_time;
         document.getElementById('best-optimization').textContent = data.best_optimization;
         document.getElementById('time-improvement').textContent = data.time_improvement;
         
+        // Add optimization message if available
+        if (data.optimization_message) {
+            // Check if we need to add the message element
+            let messageElement = document.getElementById('optimization-message');
+            if (!messageElement) {
+                // Create a message element if it doesn't exist
+                const messageContainer = document.createElement('div');
+                messageContainer.classList.add('alert', 'mt-3');
+                messageContainer.id = 'optimization-message';
+                
+                // Find where to insert the message
+                const timeImprovementCard = document.querySelector('.card-header.bg-info').closest('.card');
+                timeImprovementCard.parentNode.appendChild(messageContainer);
+                
+                messageElement = messageContainer;
+            }
+            
+            // Set message and style based on whether there was improvement
+            if (data.time_improvement && parseFloat(data.time_improvement) > 0) {
+                messageElement.textContent = data.optimization_message;
+                messageElement.classList.remove('alert-warning');
+                messageElement.classList.add('alert-success');
+            } else {
+                messageElement.textContent = data.optimization_message;
+                messageElement.classList.remove('alert-success');
+                messageElement.classList.add('alert-warning');
+            }
+        }
+        
         // Display LLVM IR
         irViewer.setValue(data.llvm_ir || 'No LLVM IR available');
+        
+        // Display optimization details if available
+        if (data.optimization_details && data.optimization_details.length > 0) {
+            // Create or update optimization details section
+            let detailsSection = document.getElementById('optimization-details');
+            if (!detailsSection) {
+                // Create the container if it doesn't exist
+                const detailsContainer = document.createElement('div');
+                detailsContainer.classList.add('card', 'mb-4');
+                detailsContainer.innerHTML = `
+                    <div class="card-header bg-dark text-white">
+                        <h5 class="mb-0">Optimization Techniques</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Technique</th>
+                                        <th>Benefit</th>
+                                        <th>Potential</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="optimization-details-body"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                `;
+                
+                // Find where to insert - before the features card
+                const featuresCard = document.querySelector('.table-responsive').closest('.card');
+                if (featuresCard && featuresCard.parentNode) {
+                    featuresCard.parentNode.insertBefore(detailsContainer, featuresCard);
+                } else {
+                    // Fallback - add to the results content area
+                    document.getElementById('results-content').appendChild(detailsContainer);
+                }
+                
+                detailsSection = detailsContainer;
+            }
+            
+            // Populate the optimization details
+            const detailsBody = document.getElementById('optimization-details-body') || 
+                               detailsSection.querySelector('tbody');
+            detailsBody.innerHTML = '';
+            
+            data.optimization_details.forEach(detail => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td><strong>${detail.name}</strong></td>
+                    <td>${detail.benefit}</td>
+                    <td>
+                        <div class="progress">
+                            <div class="progress-bar bg-info" role="progressbar" 
+                                 style="width: ${Math.min(detail.potential * 10, 100)}%" 
+                                 aria-valuenow="${detail.potential}" aria-valuemin="0" aria-valuemax="10">
+                                ${detail.potential}
+                            </div>
+                        </div>
+                    </td>
+                `;
+                detailsBody.appendChild(row);
+            });
+        }
         
         // Populate features table
         const featuresTable = document.getElementById('features-table');
@@ -137,8 +216,8 @@ int main() {
         
         const featureDescriptions = {
             'loop_count': 'Number of loops in the code',
-            'func_calls': 'Number of function calls',
-            'instr_count': 'Total number of instructions',
+            'func_calls': 'Number of function calls (including recursive calls)',
+            'instr_count': 'Total number of LLVM IR instructions',
             'has_branch': 'Contains branching instructions (if/else/switch)',
             'uses_memory': 'Uses memory operations (alloca/load/store)',
             'uses_global': 'References global variables'
@@ -146,9 +225,18 @@ int main() {
         
         for (const [key, value] of Object.entries(data.features)) {
             const row = document.createElement('tr');
+            let displayValue = value;
+            
+            // Format boolean values
+            if (value === 0 || value === 1) {
+                if (key === 'has_branch' || key === 'uses_memory' || key === 'uses_global') {
+                    displayValue = value === 1 ? '✅ Yes' : '❌ No';
+                }
+            }
+            
             row.innerHTML = `
-                <td><strong>${key.replace('_', ' ')}</strong></td>
-                <td>${value}</td>
+                <td><strong>${key.replace(/_/g, ' ')}</strong></td>
+                <td>${displayValue}</td>
                 <td>${featureDescriptions[key] || ''}</td>
             `;
             featuresTable.appendChild(row);
@@ -171,6 +259,16 @@ int main() {
             performanceChart.destroy();
         }
         
+        // Calculate percentage improvement for display
+        const improvement = unoptimizedTime > 0 ? 
+            ((unoptimizedTime - optimizedTime) / unoptimizedTime * 100).toFixed(2) : 0;
+        
+        // Determine colors based on improvement
+        const optimizedColor = optimizedTime < unoptimizedTime ? 
+            'rgba(40, 167, 69, 0.7)' : 'rgba(255, 193, 7, 0.7)';
+        const optimizedBorder = optimizedTime < unoptimizedTime ? 
+            'rgba(40, 167, 69, 1)' : 'rgba(255, 193, 7, 1)';
+        
         performanceChart = new Chart(ctx, {
             type: 'bar',
             data: {
@@ -180,11 +278,11 @@ int main() {
                     data: [unoptimizedTime, optimizedTime],
                     backgroundColor: [
                         'rgba(220, 53, 69, 0.7)',
-                        'rgba(40, 167, 69, 0.7)'
+                        optimizedColor
                     ],
                     borderColor: [
                         'rgba(220, 53, 69, 1)',
-                        'rgba(40, 167, 69, 1)'
+                        optimizedBorder
                     ],
                     borderWidth: 1
                 }]
@@ -208,7 +306,15 @@ int main() {
                     tooltip: {
                         callbacks: {
                             label: function(context) {
-                                return `${context.raw} seconds`;
+                                const value = context.raw;
+                                if (context.dataIndex === 1) {
+                                    const diff = optimizedTime < unoptimizedTime ? 
+                                        `${improvement}% faster` : 
+                                        (optimizedTime > unoptimizedTime ? 
+                                            `${Math.abs(improvement)}% slower` : 'no change');
+                                    return `${value} seconds (${diff})`;
+                                }
+                                return `${value} seconds`;
                             }
                         }
                     }
