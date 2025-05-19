@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>C Code Optimizer - ML-based LLVM Optimization</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/codemirror@5.65.13/lib/codemirror.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/codemirror@5.65.13/theme/dracula.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">
+                <i data-feather="cpu"></i> C Code Optimizer
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://github.com/llvm/llvm-project" target="_blank">LLVM</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://godbolt.org/" target="_blank">Compiler Explorer</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container-fluid mt-4">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card mb-4">
+                    <div class="card-header bg-dark text-white d-flex justify-content-between align-items-center">
+                        <h5 class="mb-0">
+                            <i data-feather="code"></i> C Code Editor
+                        </h5>
+                        <div>
+                            <button class="btn btn-sm btn-outline-light" id="run-btn">
+                                <i data-feather="play"></i> Run & Optimize
+                            </button>
+                            <button class="btn btn-sm btn-outline-light ms-2" id="reset-btn">
+                                <i data-feather="refresh-cw"></i> Reset
+                            </button>
+                        </div>
+                    </div>
+                    <div class="card-body p-0">
+                        <textarea id="code-editor">{{ example_code }}</textarea>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-6">
+                <div class="card mb-4">
+                    <div class="card-header bg-dark text-white">
+                        <h5 class="mb-0">
+                            <i data-feather="bar-chart-2"></i> Optimization Results
+                        </h5>
+                    </div>
+                    <div class="card-body">
+                        <div id="loading-spinner" class="text-center d-none">
+                            <div class="spinner-border text-primary" role="status">
+                                <span class="visually-hidden">Loading...</span>
+                            </div>
+                            <p class="mt-2">Compiling, analyzing, and optimizing your code...</p>
+                        </div>
+                        
+                        <div id="results-content" class="d-none">
+                            <div class="row mb-4">
+                                <div class="col-md-6">
+                                    <div class="card border-danger">
+                                        <div class="card-header bg-danger text-white">Unoptimized Time</div>
+                                        <div class="card-body">
+                                            <h3 id="unoptimized-time" class="text-danger mb-0">-</h3>
+                                            <small class="text-muted">seconds</small>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="card border-success">
+                                        <div class="card-header bg-success text-white">Optimized Time</div>
+                                        <div class="card-body">
+                                            <h3 id="optimized-time" class="text-success mb-0">-</h3>
+                                            <small class="text-muted">seconds</small>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="row mb-4">
+                                <div class="col-md-6">
+                                    <div class="card">
+                                        <div class="card-header bg-primary text-white">Best Optimization Pass</div>
+                                        <div class="card-body">
+                                            <h4 id="best-optimization" class="mb-0">-</h4>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="card">
+                                        <div class="card-header bg-info text-white">Performance Improvement</div>
+                                        <div class="card-body">
+                                            <h4 id="time-improvement" class="mb-0">-</h4>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="card mb-4">
+                                <div class="card-header bg-dark text-white">
+                                    <h5 class="mb-0">Execution Time Comparison</h5>
+                                </div>
+                                <div class="card-body">
+                                    <canvas id="performance-chart" height="200"></canvas>
+                                </div>
+                            </div>
+                            
+                            <div class="card">
+                                <div class="card-header bg-dark text-white d-flex justify-content-between align-items-center">
+                                    <h5 class="mb-0">Feature Analysis</h5>
+                                    <button class="btn btn-sm btn-outline-light" id="toggle-ir-btn">
+                                        Show LLVM IR
+                                    </button>
+                                </div>
+                                <div class="card-body">
+                                    <div class="table-responsive">
+                                        <table class="table table-striped">
+                                            <thead>
+                                                <tr>
+                                                    <th>Feature</th>
+                                                    <th>Value</th>
+                                                    <th>Description</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="features-table">
+                                                <!-- Features will be populated here -->
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="card mt-4 d-none" id="llvm-ir-card">
+                                <div class="card-header bg-dark text-white">
+                                    <h5 class="mb-0">LLVM IR Code</h5>
+                                </div>
+                                <div class="card-body p-0">
+                                    <textarea id="ir-viewer"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div id="error-message" class="alert alert-danger d-none">
+                            An error occurred. Please check your code and try again.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <footer class="bg-dark text-white text-center p-3 mt-5">
+        <p class="mb-0">C Code Optimization Platform © 2023 | Powered by LLVM and Machine Learning</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/codemirror@5.65.13/lib/codemirror.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/codemirror@5.65.13/mode/clike/clike.js"></script>
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>
