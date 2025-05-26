@@ -1,0 +1,342 @@
+[
+  {
+    "code_name": "simple_loop",
+    "features": {
+      "loop_count": 3,
+      "func_calls": 1,
+      "instr_count": 31,
+      "has_branch": 1,
+      "uses_memory": 1,
+      "uses_global": 0
+    },
+    "detailed_features": {
+      "loop_count": 3,
+      "loop_unroll_potential": 1,
+      "func_calls": 1,
+      "inlining_potential": 0,
+      "instr_count": 31,
+      "has_branch": 1,
+      "mem2reg_potential": 3,
+      "uses_memory": 1,
+      "uses_global": 0,
+      "const_folding_potential": 1,
+      "dce_potential": 1
+    },
+    "best_optimization": "O1",
+    "timestamp": "2025-05-26T19:27:15.217789",
+    "optimization_results": {
+      "O0": 0.0029067198435465493,
+      "O1": 0.0023368199666341147,
+      "O2": 0.002528111139933268,
+      "O3": 0.0026033719380696616,
+      "Os": 0.0028073787689208984,
+      "Oz": 0.003283818562825521
+    }
+  },
+  {
+    "code_name": "matrix_multiplication",
+    "features": {
+      "loop_count": 15,
+      "func_calls": 8,
+      "instr_count": 156,
+      "has_branch": 1,
+      "uses_memory": 1,
+      "uses_global": 0
+    },
+    "detailed_features": {
+      "loop_count": 15,
+      "loop_unroll_potential": 5,
+      "func_calls": 8,
+      "inlining_potential": 0,
+      "instr_count": 156,
+      "has_branch": 1,
+      "mem2reg_potential": 12,
+      "uses_memory": 1,
+      "uses_global": 0,
+      "const_folding_potential": 5,
+      "dce_potential": 0
+    },
+    "best_optimization": "Oz",
+    "timestamp": "2025-05-26T19:27:19.614496",
+    "optimization_results": {
+      "O0": 0.003603378931681315,
+      "O1": 0.0029659271240234375,
+      "O2": 0.0053759415944417315,
+      "O3": 0.003664890925089518,
+      "Os": 0.0032349427541097007,
+      "Oz": 0.002559820810953776
+    }
+  },
+  {
+    "code_name": "fibonacci_recursive",
+    "features": {
+      "loop_count": 5,
+      "func_calls": 8,
+      "instr_count": 55,
+      "has_branch": 1,
+      "uses_memory": 1,
+      "uses_global": 0
+    },
+    "detailed_features": {
+      "loop_count": 5,
+      "loop_unroll_potential": 1,
+      "func_calls": 8,
+      "inlining_potential": 0,
+      "instr_count": 55,
+      "has_branch": 1,
+      "mem2reg_potential": 5,
+      "uses_memory": 1,
+      "uses_global": 0,
+      "const_folding_potential": 3,
+      "dce_potential": 0
+    },
+    "best_optimization": "Os",
+    "timestamp": "2025-05-26T19:27:23.808034",
+    "optimization_results": {
+      "O0": 0.002336581548055013,
+      "O1": 0.0030607382456461587,
+      "O2": 0.00359495480855306,
+      "O3": 0.002644777297973633,
+      "Os": 0.0023103555043538413,
+      "Oz": 0.0029664834340413413
+    }
+  },
+  {
+    "code_name": "bubble_sort",
+    "features": {
+      "loop_count": 10,
+      "func_calls": 8,
+      "instr_count": 120,
+      "has_branch": 1,
+      "uses_memory": 1,
+      "uses_global": 0
+    },
+    "detailed_features": {
+      "loop_count": 10,
+      "loop_unroll_potential": 0,
+      "func_calls": 8,
+      "inlining_potential": 0,
+      "instr_count": 120,
+      "has_branch": 1,
+      "mem2reg_potential": 9,
+      "uses_memory": 1,
+      "uses_global": 0,
+      "const_folding_potential": 8,
+      "dce_potential": 0
+    },
+    "best_optimization": "O3",
+    "timestamp": "2025-05-26T19:27:28.002467",
+    "optimization_results": {
+      "O0": 0.0027272701263427734,
+      "O1": 0.0034577051798502603,
+      "O2": 0.0025664170583089194,
+      "O3": 0.002347866694132487,
+      "Os": 0.0028974215189615884,
+      "Oz": 0.0026002724965413413
+    }
+  },
+  {
+    "code_name": "binary_search",
+    "features": {
+      "loop_count": 4,
+      "func_calls": 8,
+      "instr_count": 90,
+      "has_branch": 1,
+      "uses_memory": 1,
+      "uses_global": 0
+    },
+    "detailed_features": {
+      "loop_count": 4,
+      "loop_unroll_potential": 0,
+      "func_calls": 8,
+      "inlining_potential": 1,
+      "instr_count": 90,
+      "has_branch": 1,
+      "mem2reg_potential": 11,
+      "uses_memory": 1,
+      "uses_global": 0,
+      "const_folding_potential": 4,
+      "dce_potential": 0
+    },
+    "best_optimization": "O2",
+    "timestamp": "2025-05-26T19:27:32.093825",
+    "optimization_results": {
+      "O0": 0.0023545424143473306,
+      "O1": 0.002231438954671224,
+      "O2": 0.002090613047281901,
+      "O3": 0.002614577611287435,
+      "Os": 0.002922534942626953,
+      "Oz": 0.002359787623087565
+    }
+  },
+  {
+    "code_name": "quicksort",
+    "features": {
+      "loop_count": 8,
+      "func_calls": 24,
+      "instr_count": 156,
+      "has_branch": 1,
+      "uses_memory": 1,
+      "uses_global": 0
+    },
+    "detailed_features": {
+      "loop_count": 8,
+      "loop_unroll_potential": 0,
+      "func_calls": 24,
+      "inlining_potential": 1,
+      "instr_count": 156,
+      "has_branch": 1,
+      "mem2reg_potential": 17,
+      "uses_memory": 1,
+      "uses_global": 0,
+      "const_folding_potential": 10,
+      "dce_potential": 0
+    },
+    "best_optimization": "O3",
+    "timestamp": "2025-05-26T19:27:36.228046",
+    "optimization_results": {
+      "O0": 0.002412875493367513,
+      "O1": 0.002909580866495768,
+      "O2": 0.0023232301076253257,
+      "O3": 0.0023056666056315103,
+      "Os": 0.0026088555653889975,
+      "Oz": 0.002896547317504883
+    }
+  },
+  {
+    "code_name": "string_search",
+    "features": {
+      "loop_count": 9,
+      "func_calls": 8,
+      "instr_count": 101,
+      "has_branch": 1,
+      "uses_memory": 1,
+      "uses_global": 0
+    },
+    "detailed_features": {
+      "loop_count": 9,
+      "loop_unroll_potential": 0,
+      "func_calls": 8,
+      "inlining_potential": 1,
+      "instr_count": 101,
+      "has_branch": 1,
+      "mem2reg_potential": 11,
+      "uses_memory": 1,
+      "uses_global": 0,
+      "const_folding_potential": 2,
+      "dce_potential": 0
+    },
+    "best_optimization": "O0",
+    "timestamp": "2025-05-26T19:27:40.338633",
+    "optimization_results": {
+      "O0": 0.002045869827270508,
+      "O1": 0.0021590391794840493,
+      "O2": 0.0021686553955078125,
+      "O3": 0.0031659603118896484,
+      "Os": 0.003430048624674479,
+      "Oz": 0.0023270448048909507
+    }
+  },
+  {
+    "code_name": "prime_sieve",
+    "features": {
+      "loop_count": 14,
+      "func_calls": 8,
+      "instr_count": 129,
+      "has_branch": 1,
+      "uses_memory": 1,
+      "uses_global": 0
+    },
+    "detailed_features": {
+      "loop_count": 14,
+      "loop_unroll_potential": 1,
+      "func_calls": 8,
+      "inlining_potential": 1,
+      "instr_count": 129,
+      "has_branch": 1,
+      "mem2reg_potential": 10,
+      "uses_memory": 1,
+      "uses_global": 0,
+      "const_folding_potential": 4,
+      "dce_potential": 3
+    },
+    "best_optimization": "Oz",
+    "timestamp": "2025-05-26T19:27:44.439979",
+    "optimization_results": {
+      "O0": 0.0021774768829345703,
+      "O1": 0.0020313262939453125,
+      "O2": 0.0021485487620035806,
+      "O3": 0.002292792002360026,
+      "Os": 0.0020900567372639975,
+      "Oz": 0.002015193303426107
+    }
+  },
+  {
+    "code_name": "factorial_iterative",
+    "features": {
+      "loop_count": 3,
+      "func_calls": 8,
+      "instr_count": 50,
+      "has_branch": 1,
+      "uses_memory": 1,
+      "uses_global": 0
+    },
+    "detailed_features": {
+      "loop_count": 3,
+      "loop_unroll_potential": 0,
+      "func_calls": 8,
+      "inlining_potential": 1,
+      "instr_count": 50,
+      "has_branch": 1,
+      "mem2reg_potential": 5,
+      "uses_memory": 1,
+      "uses_global": 0,
+      "const_folding_potential": 1,
+      "dce_potential": 0
+    },
+    "best_optimization": "O3",
+    "timestamp": "2025-05-26T19:27:48.548296",
+    "optimization_results": {
+      "O0": 0.0026237169901529946,
+      "O1": 0.0021851062774658203,
+      "O2": 0.002801974614461263,
+      "O3": 0.0020814736684163413,
+      "Os": 0.002960046132405599,
+      "Oz": 0.0026297569274902344
+    }
+  },
+  {
+    "code_name": "linked_list",
+    "features": {
+      "loop_count": 6,
+      "func_calls": 16,
+      "instr_count": 87,
+      "has_branch": 1,
+      "uses_memory": 1,
+      "uses_global": 0
+    },
+    "detailed_features": {
+      "loop_count": 6,
+      "loop_unroll_potential": 0,
+      "func_calls": 16,
+      "inlining_potential": 1,
+      "instr_count": 87,
+      "has_branch": 1,
+      "mem2reg_potential": 7,
+      "uses_memory": 1,
+      "uses_global": 0,
+      "const_folding_potential": 0,
+      "dce_potential": 0
+    },
+    "best_optimization": "O2",
+    "timestamp": "2025-05-26T19:27:52.728682",
+    "optimization_results": {
+      "O0": 0.002457777659098307,
+      "O1": 0.002873500188191732,
+      "O2": 0.00202027956644694,
+      "O3": 0.002072572708129883,
+      "Os": 0.0027071634928385415,
+      "Oz": 0.002414544423421224
+    }
+  }
+]

@@ -9,6 +9,8 @@ from utils.compiler import compile_c_to_ir, compile_c_with_optimization
 from utils.timer import measure_execution_time
 from utils.feature_extractor import extract_features_from_ir
 from utils.model_predictor import predict_optimization_pass
+from utils.enhanced_model_trainer import EnhancedModelTrainer
+from utils.dataset_manager import DatasetManager
 
 # Configure logging
 logging.basicConfig(level=logging.DEBUG)
@@ -16,6 +18,18 @@ logger = logging.getLogger(__name__)
 
 app = Flask(__name__)
 app.secret_key = os.environ.get("SESSION_SECRET", "default_secret_key")
+
+# Initialize the enhanced training system
+model_trainer = EnhancedModelTrainer()
+dataset_manager = DatasetManager()
+
+# Train the model on startup with existing dataset
+try:
+    model_trainer.train_model_from_dataset()
+    logger.info("Model training completed successfully")
+except Exception as e:
+    logger.warning(f"Model training failed: {str(e)}, using enhanced default model")
+    model_trainer.create_enhanced_default_model()
 
 # Example C code for demonstration - using a matrix multiplication example instead of Fibonacci
 EXAMPLE_C_CODE = '''
@@ -194,6 +208,62 @@ def optimize():
             
     except Exception as e:
         logger.exception("Error in optimization process")
+        return jsonify({'error': str(e)}), 500
+
+@app.route('/contribute', methods=['POST'])
+def contribute_code():
+    """
+    Allow users to contribute C code to the training dataset
+    This improves the model's accuracy over time
+    """
+    try:
+        data = request.get_json()
+        c_code = data.get('code', '')
+        code_name = data.get('name', '').strip()
+        
+        if not c_code or not code_name:
+            return jsonify({'error': 'Both code and name are required'}), 400
+        
+        # Validate code name (basic sanitization)
+        import re
+        if not re.match(r'^[a-zA-Z0-9_]+$', code_name):
+            return jsonify({'error': 'Code name can only contain letters, numbers, and underscores'}), 400
+        
+        # Add the code to the training dataset
+        success = model_trainer.update_model_with_new_code(c_code, code_name)
+        
+        if success:
+            # Get updated dataset statistics
+            stats = dataset_manager.get_dataset_stats()
+            
+            return jsonify({
+                'success': True,
+                'message': f'Code "{code_name}" added to training dataset successfully!',
+                'dataset_stats': stats
+            })
+        else:
+            return jsonify({'error': 'Failed to add code to dataset'}), 500
+            
+    except Exception as e:
+        logger.exception("Error in code contribution process")
+        return jsonify({'error': str(e)}), 500
+
+@app.route('/dataset-stats')
+def get_dataset_stats():
+    """
+    Get current dataset statistics
+    """
+    try:
+        stats = dataset_manager.get_dataset_stats()
+        model_info = model_trainer.get_model_performance_info()
+        
+        return jsonify({
+            'dataset_stats': stats,
+            'model_info': model_info
+        })
+        
+    except Exception as e:
+        logger.exception("Error getting dataset stats")
         return jsonify({'error': str(e)}), 500
 
 if __name__ == '__main__':
