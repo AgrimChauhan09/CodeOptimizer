@@ -5,7 +5,7 @@ import statistics
 
 logger = logging.getLogger(__name__)
 
-def measure_execution_time(executable_path, runs=3):
+def measure_execution_time(executable_path, runs=5):
     """
     Measure the execution time of a compiled program by running it multiple times
     and returning the average time.
@@ -24,8 +24,12 @@ def measure_execution_time(executable_path, runs=3):
     execution_times = []
     
     try:
-        for _ in range(runs):
-            start_time = time.time()
+        for i in range(runs):
+            # Add small delay between runs for consistency
+            if i > 0:
+                time.sleep(0.05)
+                
+            start_time = time.perf_counter()  # More precise timing
             
             # Run the executable
             process = subprocess.run([executable_path], 
@@ -33,12 +37,13 @@ def measure_execution_time(executable_path, runs=3):
                                     text=True, 
                                     timeout=10)  # 10 second timeout
             
-            end_time = time.time()
-            execution_time = end_time - start_time
-            execution_times.append(execution_time)
+            end_time = time.perf_counter()
             
-            # Brief pause between runs
-            time.sleep(0.1)
+            if process.returncode == 0:
+                execution_time = end_time - start_time
+                execution_times.append(execution_time)
+            else:
+                logger.warning(f"Execution failed for {executable_path}: {process.stderr}")
             
         # Calculate average execution time
         if execution_times:
