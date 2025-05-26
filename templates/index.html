@@ -48,6 +48,9 @@
                             <button class="btn btn-sm btn-outline-light" id="run-btn">
                                 <i data-feather="play"></i> Run & Optimize
                             </button>
+                            <button class="btn btn-sm btn-outline-success ms-2" id="add-to-dataset-btn">
+                                <i data-feather="database"></i> Add to Dataset
+                            </button>
                             <button class="btn btn-sm btn-outline-light ms-2" id="reset-btn">
                                 <i data-feather="refresh-cw"></i> Reset
                             </button>
@@ -163,6 +166,69 @@
                             An error occurred. Please check your code and try again.
                         </div>
                     </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Dataset Statistics Section -->
+        <div class="row mt-4">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header bg-gradient-primary text-white d-flex justify-content-between align-items-center">
+                        <h5 class="mb-0">
+                            <i data-feather="trending-up"></i> Training Dataset Statistics
+                        </h5>
+                        <button class="btn btn-sm btn-outline-light" id="refresh-stats-btn">
+                            <i data-feather="refresh-cw"></i> Refresh
+                        </button>
+                    </div>
+                    <div class="card-body">
+                        <div class="row" id="dataset-stats">
+                            <div class="col-md-3">
+                                <div class="text-center">
+                                    <h3 class="text-primary" id="total-codes">-</h3>
+                                    <p class="text-muted">Total Codes</p>
+                                </div>
+                            </div>
+                            <div class="col-md-9">
+                                <h6>Optimization Distribution:</h6>
+                                <div id="optimization-distribution" class="d-flex flex-wrap gap-2">
+                                    <!-- Distribution badges will be populated here -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Add to Dataset Modal -->
+    <div class="modal fade" id="addToDatasetModal" tabindex="-1" aria-labelledby="addToDatasetModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header bg-success text-white">
+                    <h5 class="modal-title" id="addToDatasetModalLabel">
+                        <i data-feather="database"></i> Add Code to Training Dataset
+                    </h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p class="text-muted">Contributing your code to the training dataset helps improve optimization accuracy for everyone!</p>
+                    <div class="mb-3">
+                        <label for="code-name-input" class="form-label">Code Name (filename without extension):</label>
+                        <input type="text" class="form-control" id="code-name-input" placeholder="e.g., my_algorithm, sorting_example">
+                        <div class="form-text">Use only letters, numbers, and underscores. This will be the filename for your contribution.</div>
+                    </div>
+                    <div class="alert alert-info">
+                        <i data-feather="info"></i> Your code will be tested with all optimization levels to find the best one for training the ML model.
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-success" id="confirm-add-to-dataset">
+                        <i data-feather="plus"></i> Add to Dataset
+                    </button>
                 </div>
             </div>
         </div>

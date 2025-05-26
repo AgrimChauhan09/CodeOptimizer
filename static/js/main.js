@@ -51,6 +51,40 @@ document.addEventListener('DOMContentLoaded', function() {
         hideError();
     });
     
+    // Handle add to dataset button click
+    document.getElementById('add-to-dataset-btn').addEventListener('click', function() {
+        const code = codeEditor.getValue();
+        if (!code.trim()) {
+            showError('Please enter some C code before adding to dataset');
+            return;
+        }
+        
+        // Show the modal
+        const modal = new bootstrap.Modal(document.getElementById('addToDatasetModal'));
+        modal.show();
+    });
+    
+    // Handle confirm add to dataset
+    document.getElementById('confirm-add-to-dataset').addEventListener('click', function() {
+        const code = codeEditor.getValue();
+        const codeName = document.getElementById('code-name-input').value.trim();
+        
+        if (!codeName) {
+            alert('Please enter a code name');
+            return;
+        }
+        
+        addToDataset(code, codeName);
+    });
+    
+    // Handle refresh stats button
+    document.getElementById('refresh-stats-btn').addEventListener('click', function() {
+        loadDatasetStats();
+    });
+    
+    // Load dataset stats on page load
+    loadDatasetStats();
+    
     // Toggle LLVM IR code visibility
     document.getElementById('toggle-ir-btn').addEventListener('click', function() {
         const irCard = document.getElementById('llvm-ir-card');
@@ -348,5 +382,112 @@ document.addEventListener('DOMContentLoaded', function() {
     
     function hideError() {
         document.getElementById('error-message').classList.add('d-none');
+    }
+    
+    // Function to add code to dataset
+    function addToDataset(code, codeName) {
+        // Show loading state
+        const confirmBtn = document.getElementById('confirm-add-to-dataset');
+        const originalText = confirmBtn.innerHTML;
+        confirmBtn.innerHTML = '<span class="spinner-border spinner-border-sm" role="status"></span> Adding...';
+        confirmBtn.disabled = true;
+        
+        fetch('/contribute', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ 
+                code: code,
+                name: codeName
+            })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                // Close modal
+                const modal = bootstrap.Modal.getInstance(document.getElementById('addToDatasetModal'));
+                modal.hide();
+                
+                // Clear input
+                document.getElementById('code-name-input').value = '';
+                
+                // Show success message
+                showSuccess(`✅ Code "${codeName}" successfully added to training dataset! This helps improve optimization accuracy for everyone.`);
+                
+                // Refresh dataset stats
+                loadDatasetStats();
+            } else {
+                showError(data.error || 'Failed to add code to dataset');
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            showError('Network error while adding code to dataset');
+        })
+        .finally(() => {
+            // Restore button
+            confirmBtn.innerHTML = originalText;
+            confirmBtn.disabled = false;
+        });
+    }
+    
+    // Function to load dataset statistics
+    function loadDatasetStats() {
+        fetch('/dataset-stats')
+        .then(response => response.json())
+        .then(data => {
+            if (data.dataset_stats) {
+                // Update total codes
+                document.getElementById('total-codes').textContent = data.dataset_stats.total_codes || 0;
+                
+                // Update optimization distribution
+                const distributionContainer = document.getElementById('optimization-distribution');
+                distributionContainer.innerHTML = '';
+                
+                if (data.dataset_stats.optimization_distribution) {
+                    Object.entries(data.dataset_stats.optimization_distribution).forEach(([opt, count]) => {
+                        const badge = document.createElement('span');
+                        badge.className = 'badge bg-primary me-2 mb-2';
+                        badge.textContent = `${opt}: ${count}`;
+                        distributionContainer.appendChild(badge);
+                    });
+                }
+                
+                if (distributionContainer.children.length === 0) {
+                    distributionContainer.innerHTML = '<span class="text-muted">No data available</span>';
+                }
+            }
+        })
+        .catch(error => {
+            console.error('Error loading dataset stats:', error);
+        });
+    }
+    
+    // Function to show success message
+    function showSuccess(message) {
+        // Remove existing success messages
+        const existingSuccess = document.querySelector('.alert-success');
+        if (existingSuccess) {
+            existingSuccess.remove();
+        }
+        
+        const successDiv = document.createElement('div');
+        successDiv.className = 'alert alert-success alert-dismissible fade show';
+        successDiv.innerHTML = `
+            ${message}
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        `;
+        
+        // Insert at top of main container
+        const container = document.querySelector('.container-fluid');
+        container.insertBefore(successDiv, container.firstChild);
+        
+        // Auto-hide after 5 seconds
+        setTimeout(() => {
+            if (successDiv.parentNode) {
+                successDiv.remove();
+            }
+        }, 5000);
     }
 });
