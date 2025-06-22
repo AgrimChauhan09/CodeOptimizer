@@ -77,13 +77,7 @@ document.addEventListener('DOMContentLoaded', function() {
         addToDataset(code, codeName);
     });
     
-    // Handle refresh stats button
-    document.getElementById('refresh-stats-btn').addEventListener('click', function() {
-        loadDatasetStats();
-    });
-    
-    // Load dataset stats on page load
-    loadDatasetStats();
+    // Dataset statistics section removed per user request
     
     // Toggle LLVM IR code visibility
     document.getElementById('toggle-ir-btn').addEventListener('click', function() {
@@ -421,8 +415,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 // Show success message
                 showSuccess(`✅ Code "${codeName}" successfully added to training dataset! This helps improve optimization accuracy for everyone.`);
                 
-                // Refresh dataset stats
-                loadDatasetStats();
+                // Dataset statistics functionality removed
             } else {
                 showError(data.error || 'Failed to add code to dataset');
             }
@@ -438,37 +431,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
     
-    // Function to load dataset statistics
-    function loadDatasetStats() {
-        fetch('/dataset-stats')
-        .then(response => response.json())
-        .then(data => {
-            if (data.dataset_stats) {
-                // Update total codes
-                document.getElementById('total-codes').textContent = data.dataset_stats.total_codes || 0;
-                
-                // Update optimization distribution
-                const distributionContainer = document.getElementById('optimization-distribution');
-                distributionContainer.innerHTML = '';
-                
-                if (data.dataset_stats.optimization_distribution) {
-                    Object.entries(data.dataset_stats.optimization_distribution).forEach(([opt, count]) => {
-                        const badge = document.createElement('span');
-                        badge.className = 'badge bg-primary me-2 mb-2';
-                        badge.textContent = `${opt}: ${count}`;
-                        distributionContainer.appendChild(badge);
-                    });
-                }
-                
-                if (distributionContainer.children.length === 0) {
-                    distributionContainer.innerHTML = '<span class="text-muted">No data available</span>';
-                }
-            }
-        })
-        .catch(error => {
-            console.error('Error loading dataset stats:', error);
-        });
-    }
+    // Dataset statistics functionality removed per user request
     
     // Function to show success message
     function showSuccess(message) {
