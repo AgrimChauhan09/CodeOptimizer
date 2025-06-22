@@ -882,5 +882,39 @@
       "Os": 0.001991,
       "Oz": 0.002212
     }
+  },
+  {
+    "code_name": "sum",
+    "features": {
+      "loop_count": 3,
+      "func_calls": 2,
+      "instr_count": 37,
+      "has_branch": 1,
+      "uses_memory": 1,
+      "uses_global": 0
+    },
+    "detailed_features": {
+      "loop_count": 3,
+      "loop_unroll_potential": 1,
+      "func_calls": 2,
+      "inlining_potential": 0,
+      "instr_count": 37,
+      "has_branch": 1,
+      "mem2reg_potential": 4,
+      "uses_memory": 1,
+      "uses_global": 0,
+      "const_folding_potential": 1,
+      "dce_potential": 1
+    },
+    "best_optimization": "O0",
+    "timestamp": "2025-06-22T09:51:48.367796",
+    "optimization_results": {
+      "O0": 0.00111,
+      "O1": 0.002035,
+      "O2": 0.002174,
+      "O3": 0.001799,
+      "Os": 0.002182,
+      "Oz": 0.002299
+    }
   }
 ]
