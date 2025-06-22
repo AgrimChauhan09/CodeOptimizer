@@ -22,15 +22,15 @@
       "const_folding_potential": 1,
       "dce_potential": 1
     },
-    "best_optimization": "O1",
-    "timestamp": "2025-05-26T19:27:15.217789",
+    "best_optimization": "O2",
+    "timestamp": "2025-06-22T03:47:49.335019",
     "optimization_results": {
-      "O0": 0.0029067198435465493,
-      "O1": 0.0023368199666341147,
-      "O2": 0.002528111139933268,
-      "O3": 0.0026033719380696616,
-      "Os": 0.0028073787689208984,
-      "Oz": 0.003283818562825521
+      "O0": 0.002073,
+      "O1": 0.002115,
+      "O2": 0.001852,
+      "O3": 0.002062,
+      "Os": 0.0026,
+      "Oz": 0.002143
     }
   },
   {
@@ -56,15 +56,15 @@
       "const_folding_potential": 5,
       "dce_potential": 0
     },
-    "best_optimization": "Oz",
-    "timestamp": "2025-05-26T19:27:19.614496",
+    "best_optimization": "Os",
+    "timestamp": "2025-06-22T03:47:51.569113",
     "optimization_results": {
-      "O0": 0.003603378931681315,
-      "O1": 0.0029659271240234375,
-      "O2": 0.0053759415944417315,
-      "O3": 0.003664890925089518,
-      "Os": 0.0032349427541097007,
-      "Oz": 0.002559820810953776
+      "O0": 0.003808,
+      "O1": 0.002756,
+      "O2": 0.002243,
+      "O3": 0.002113,
+      "Os": 0.001968,
+      "Oz": 0.002493
     }
   },
   {
@@ -91,14 +91,14 @@
       "dce_potential": 0
     },
     "best_optimization": "Os",
-    "timestamp": "2025-05-26T19:27:23.808034",
+    "timestamp": "2025-06-22T03:47:53.691909",
     "optimization_results": {
-      "O0": 0.002336581548055013,
-      "O1": 0.0030607382456461587,
-      "O2": 0.00359495480855306,
-      "O3": 0.002644777297973633,
-      "Os": 0.0023103555043538413,
-      "Oz": 0.0029664834340413413
+      "O0": 0.002036,
+      "O1": 0.002121,
+      "O2": 0.002236,
+      "O3": 0.002061,
+      "Os": 0.001865,
+      "Oz": 0.002236
     }
   },
   {
@@ -125,14 +125,14 @@
       "dce_potential": 0
     },
     "best_optimization": "O3",
-    "timestamp": "2025-05-26T19:27:28.002467",
+    "timestamp": "2025-06-22T03:47:55.865262",
     "optimization_results": {
-      "O0": 0.0027272701263427734,
-      "O1": 0.0034577051798502603,
-      "O2": 0.0025664170583089194,
-      "O3": 0.002347866694132487,
-      "Os": 0.0028974215189615884,
-      "Oz": 0.0026002724965413413
+      "O0": 0.00199,
+      "O1": 0.002106,
+      "O2": 0.001979,
+      "O3": 0.001916,
+      "Os": 0.002338,
+      "Oz": 0.001921
     }
   },
   {
@@ -158,15 +158,15 @@
       "const_folding_potential": 4,
       "dce_potential": 0
     },
-    "best_optimization": "O2",
-    "timestamp": "2025-05-26T19:27:32.093825",
+    "best_optimization": "Os",
+    "timestamp": "2025-06-22T03:47:58.074627",
     "optimization_results": {
-      "O0": 0.0023545424143473306,
-      "O1": 0.002231438954671224,
-      "O2": 0.002090613047281901,
-      "O3": 0.002614577611287435,
-      "Os": 0.002922534942626953,
-      "Oz": 0.002359787623087565
+      "O0": 0.003043,
+      "O1": 0.002074,
+      "O2": 0.002184,
+      "O3": 0.002087,
+      "Os": 0.001985,
+      "Oz": 0.002083
     }
   },
   {
@@ -192,15 +192,15 @@
       "const_folding_potential": 10,
       "dce_potential": 0
     },
-    "best_optimization": "O3",
-    "timestamp": "2025-05-26T19:27:36.228046",
+    "best_optimization": "Oz",
+    "timestamp": "2025-06-22T03:48:00.264022",
     "optimization_results": {
-      "O0": 0.002412875493367513,
-      "O1": 0.002909580866495768,
-      "O2": 0.0023232301076253257,
-      "O3": 0.0023056666056315103,
-      "Os": 0.0026088555653889975,
-      "Oz": 0.002896547317504883
+      "O0": 0.00204,
+      "O1": 0.002481,
+      "O2": 0.002197,
+      "O3": 0.00214,
+      "Os": 0.002275,
+      "Oz": 0.001823
     }
   },
   {
@@ -227,14 +227,14 @@
       "dce_potential": 0
     },
     "best_optimization": "O0",
-    "timestamp": "2025-05-26T19:27:40.338633",
+    "timestamp": "2025-06-22T03:48:02.400753",
     "optimization_results": {
-      "O0": 0.002045869827270508,
-      "O1": 0.0021590391794840493,
-      "O2": 0.0021686553955078125,
-      "O3": 0.0031659603118896484,
-      "Os": 0.003430048624674479,
-      "Oz": 0.0023270448048909507
+      "O0": 0.001821,
+      "O1": 0.002047,
+      "O2": 0.001992,
+      "O3": 0.00201,
+      "Os": 0.001937,
+      "Oz": 0.001949
     }
   },
   {
@@ -260,15 +260,15 @@
       "const_folding_potential": 4,
       "dce_potential": 3
     },
-    "best_optimization": "Oz",
-    "timestamp": "2025-05-26T19:27:44.439979",
+    "best_optimization": "O0",
+    "timestamp": "2025-06-22T03:48:04.610313",
     "optimization_results": {
-      "O0": 0.0021774768829345703,
-      "O1": 0.0020313262939453125,
-      "O2": 0.0021485487620035806,
-      "O3": 0.002292792002360026,
-      "Os": 0.0020900567372639975,
-      "Oz": 0.002015193303426107
+      "O0": 0.00183,
+      "O1": 0.001966,
+      "O2": 0.001899,
+      "O3": 0.002606,
+      "Os": 0.002311,
+      "Oz": 0.002034
     }
   },
   {
@@ -294,15 +294,15 @@
       "const_folding_potential": 1,
       "dce_potential": 0
     },
-    "best_optimization": "O3",
-    "timestamp": "2025-05-26T19:27:48.548296",
+    "best_optimization": "Os",
+    "timestamp": "2025-06-22T03:48:07.085494",
     "optimization_results": {
-      "O0": 0.0026237169901529946,
-      "O1": 0.0021851062774658203,
-      "O2": 0.002801974614461263,
-      "O3": 0.0020814736684163413,
-      "Os": 0.002960046132405599,
-      "Oz": 0.0026297569274902344
+      "O0": 0.00359,
+      "O1": 0.004412,
+      "O2": 0.00367,
+      "O3": 0.00688,
+      "Os": 0.002479,
+      "Oz": 0.003133
     }
   },
   {
@@ -328,15 +328,559 @@
       "const_folding_potential": 0,
       "dce_potential": 0
     },
-    "best_optimization": "O2",
-    "timestamp": "2025-05-26T19:27:52.728682",
+    "best_optimization": "O0",
+    "timestamp": "2025-06-22T03:48:09.580781",
     "optimization_results": {
-      "O0": 0.002457777659098307,
-      "O1": 0.002873500188191732,
-      "O2": 0.00202027956644694,
-      "O3": 0.002072572708129883,
-      "Os": 0.0027071634928385415,
-      "Oz": 0.002414544423421224
+      "O0": 0.002154,
+      "O1": 0.003132,
+      "O2": 0.002745,
+      "O3": 0.003624,
+      "Os": 0.002593,
+      "Oz": 0.002565
+    }
+  },
+  {
+    "code_name": "merge_sort",
+    "features": {
+      "loop_count": 19,
+      "func_calls": 16,
+      "instr_count": 279,
+      "has_branch": 1,
+      "uses_memory": 1,
+      "uses_global": 0
+    },
+    "detailed_features": {
+      "loop_count": 19,
+      "loop_unroll_potential": 0,
+      "func_calls": 16,
+      "inlining_potential": 0,
+      "instr_count": 279,
+      "has_branch": 1,
+      "mem2reg_potential": 24,
+      "uses_memory": 1,
+      "uses_global": 0,
+      "const_folding_potential": 15,
+      "dce_potential": 0
+    },
+    "best_optimization": "Oz",
+    "timestamp": "2025-06-22T03:48:12.075115",
+    "optimization_results": {
+      "O0": 0.003797,
+      "O1": 0.002434,
+      "O2": 0.003645,
+      "O3": 0.003414,
+      "Os": 0.002825,
+      "Oz": 0.001872
+    }
+  },
+  {
+    "code_name": "heap_sort",
+    "features": {
+      "loop_count": 12,
+      "func_calls": 24,
+      "instr_count": 192,
+      "has_branch": 1,
+      "uses_memory": 1,
+      "uses_global": 0
+    },
+    "detailed_features": {
+      "loop_count": 12,
+      "loop_unroll_potential": 2,
+      "func_calls": 24,
+      "inlining_potential": 1,
+      "instr_count": 192,
+      "has_branch": 1,
+      "mem2reg_potential": 17,
+      "uses_memory": 1,
+      "uses_global": 0,
+      "const_folding_potential": 6,
+      "dce_potential": 0
+    },
+    "best_optimization": "O2",
+    "timestamp": "2025-06-22T03:48:14.278238",
+    "optimization_results": {
+      "O0": 0.003082,
+      "O1": 0.002258,
+      "O2": 0.001979,
+      "O3": 0.003253,
+      "Os": 0.002382,
+      "Oz": 0.002119
+    }
+  },
+  {
+    "code_name": "array_operations",
+    "features": {
+      "loop_count": 4,
+      "func_calls": 8,
+      "instr_count": 60,
+      "has_branch": 1,
+      "uses_memory": 1,
+      "uses_global": 0
+    },
+    "detailed_features": {
+      "loop_count": 4,
+      "loop_unroll_potential": 0,
+      "func_calls": 8,
+      "inlining_potential": 1,
+      "instr_count": 60,
+      "has_branch": 1,
+      "mem2reg_potential": 7,
+      "uses_memory": 1,
+      "uses_global": 0,
+      "const_folding_potential": 1,
+      "dce_potential": 0
+    },
+    "best_optimization": "O1",
+    "timestamp": "2025-06-22T03:48:16.521866",
+    "optimization_results": {
+      "O0": 0.002078,
+      "O1": 0.001894,
+      "O2": 0.003024,
+      "O3": 0.002954,
+      "Os": 0.002096,
+      "Oz": 0.002423
+    }
+  },
+  {
+    "code_name": "polynomial_eval",
+    "features": {
+      "loop_count": 3,
+      "func_calls": 8,
+      "instr_count": 57,
+      "has_branch": 1,
+      "uses_memory": 1,
+      "uses_global": 0
+    },
+    "detailed_features": {
+      "loop_count": 3,
+      "loop_unroll_potential": 0,
+      "func_calls": 8,
+      "inlining_potential": 1,
+      "instr_count": 57,
+      "has_branch": 1,
+      "mem2reg_potential": 9,
+      "uses_memory": 1,
+      "uses_global": 0,
+      "const_folding_potential": 1,
+      "dce_potential": 0
+    },
+    "best_optimization": "Oz",
+    "timestamp": "2025-06-22T03:48:18.723251",
+    "optimization_results": {
+      "O0": 0.001928,
+      "O1": 0.002525,
+      "O2": 0.002233,
+      "O3": 0.001888,
+      "Os": 0.00205,
+      "Oz": 0.001762
+    }
+  },
+  {
+    "code_name": "selection_sort",
+    "features": {
+      "loop_count": 10,
+      "func_calls": 8,
+      "instr_count": 121,
+      "has_branch": 1,
+      "uses_memory": 1,
+      "uses_global": 0
+    },
+    "detailed_features": {
+      "loop_count": 10,
+      "loop_unroll_potential": 0,
+      "func_calls": 8,
+      "inlining_potential": 0,
+      "instr_count": 121,
+      "has_branch": 1,
+      "mem2reg_potential": 10,
+      "uses_memory": 1,
+      "uses_global": 0,
+      "const_folding_potential": 5,
+      "dce_potential": 1
+    },
+    "best_optimization": "O1",
+    "timestamp": "2025-06-22T03:48:20.870138",
+    "optimization_results": {
+      "O0": 0.002384,
+      "O1": 0.001963,
+      "O2": 0.002014,
+      "O3": 0.002208,
+      "Os": 0.002259,
+      "Oz": 0.002075
+    }
+  },
+  {
+    "code_name": "example_1",
+    "features": {
+      "loop_count": 3,
+      "func_calls": 8,
+      "instr_count": 50,
+      "has_branch": 1,
+      "uses_memory": 1,
+      "uses_global": 0
+    },
+    "detailed_features": {
+      "loop_count": 3,
+      "loop_unroll_potential": 0,
+      "func_calls": 8,
+      "inlining_potential": 1,
+      "instr_count": 50,
+      "has_branch": 1,
+      "mem2reg_potential": 4,
+      "uses_memory": 1,
+      "uses_global": 0,
+      "const_folding_potential": 2,
+      "dce_potential": 0
+    },
+    "best_optimization": "O0",
+    "timestamp": "2025-06-22T03:48:22.975894",
+    "optimization_results": {
+      "O0": 0.001875,
+      "O1": 0.001879,
+      "O2": 0.002053,
+      "O3": 0.002608,
+      "Os": 0.002366,
+      "Oz": 0.002202
+    }
+  },
+  {
+    "code_name": "example_2",
+    "features": {
+      "loop_count": 3,
+      "func_calls": 8,
+      "instr_count": 50,
+      "has_branch": 1,
+      "uses_memory": 1,
+      "uses_global": 0
+    },
+    "detailed_features": {
+      "loop_count": 3,
+      "loop_unroll_potential": 0,
+      "func_calls": 8,
+      "inlining_potential": 1,
+      "instr_count": 50,
+      "has_branch": 1,
+      "mem2reg_potential": 4,
+      "uses_memory": 1,
+      "uses_global": 0,
+      "const_folding_potential": 2,
+      "dce_potential": 0
+    },
+    "best_optimization": "Os",
+    "timestamp": "2025-06-22T03:48:25.211473",
+    "optimization_results": {
+      "O0": 0.00259,
+      "O1": 0.002578,
+      "O2": 0.002052,
+      "O3": 0.001924,
+      "Os": 0.001895,
+      "Oz": 0.002087
+    }
+  },
+  {
+    "code_name": "example_3",
+    "features": {
+      "loop_count": 3,
+      "func_calls": 8,
+      "instr_count": 50,
+      "has_branch": 1,
+      "uses_memory": 1,
+      "uses_global": 0
+    },
+    "detailed_features": {
+      "loop_count": 3,
+      "loop_unroll_potential": 0,
+      "func_calls": 8,
+      "inlining_potential": 1,
+      "instr_count": 50,
+      "has_branch": 1,
+      "mem2reg_potential": 4,
+      "uses_memory": 1,
+      "uses_global": 0,
+      "const_folding_potential": 2,
+      "dce_potential": 0
+    },
+    "best_optimization": "O2",
+    "timestamp": "2025-06-22T03:48:27.450982",
+    "optimization_results": {
+      "O0": 0.002076,
+      "O1": 0.002056,
+      "O2": 0.002012,
+      "O3": 0.003084,
+      "Os": 0.002067,
+      "Oz": 0.003372
+    }
+  },
+  {
+    "code_name": "example_4",
+    "features": {
+      "loop_count": 3,
+      "func_calls": 8,
+      "instr_count": 50,
+      "has_branch": 1,
+      "uses_memory": 1,
+      "uses_global": 0
+    },
+    "detailed_features": {
+      "loop_count": 3,
+      "loop_unroll_potential": 0,
+      "func_calls": 8,
+      "inlining_potential": 1,
+      "instr_count": 50,
+      "has_branch": 1,
+      "mem2reg_potential": 4,
+      "uses_memory": 1,
+      "uses_global": 0,
+      "const_folding_potential": 2,
+      "dce_potential": 0
+    },
+    "best_optimization": "Oz",
+    "timestamp": "2025-06-22T03:48:29.709633",
+    "optimization_results": {
+      "O0": 0.003514,
+      "O1": 0.002677,
+      "O2": 0.00212,
+      "O3": 0.002149,
+      "Os": 0.002874,
+      "Oz": 0.00199
+    }
+  },
+  {
+    "code_name": "example_5",
+    "features": {
+      "loop_count": 3,
+      "func_calls": 8,
+      "instr_count": 50,
+      "has_branch": 1,
+      "uses_memory": 1,
+      "uses_global": 0
+    },
+    "detailed_features": {
+      "loop_count": 3,
+      "loop_unroll_potential": 0,
+      "func_calls": 8,
+      "inlining_potential": 1,
+      "instr_count": 50,
+      "has_branch": 1,
+      "mem2reg_potential": 4,
+      "uses_memory": 1,
+      "uses_global": 0,
+      "const_folding_potential": 2,
+      "dce_potential": 0
+    },
+    "best_optimization": "O2",
+    "timestamp": "2025-06-22T03:48:31.989790",
+    "optimization_results": {
+      "O0": 0.002375,
+      "O1": 0.003208,
+      "O2": 0.002178,
+      "O3": 0.002625,
+      "Os": 0.002314,
+      "Oz": 0.002364
+    }
+  },
+  {
+    "code_name": "example_6",
+    "features": {
+      "loop_count": 3,
+      "func_calls": 8,
+      "instr_count": 50,
+      "has_branch": 1,
+      "uses_memory": 1,
+      "uses_global": 0
+    },
+    "detailed_features": {
+      "loop_count": 3,
+      "loop_unroll_potential": 0,
+      "func_calls": 8,
+      "inlining_potential": 1,
+      "instr_count": 50,
+      "has_branch": 1,
+      "mem2reg_potential": 4,
+      "uses_memory": 1,
+      "uses_global": 0,
+      "const_folding_potential": 2,
+      "dce_potential": 0
+    },
+    "best_optimization": "Oz",
+    "timestamp": "2025-06-22T03:48:34.442656",
+    "optimization_results": {
+      "O0": 0.002709,
+      "O1": 0.002661,
+      "O2": 0.003638,
+      "O3": 0.002898,
+      "Os": 0.003575,
+      "Oz": 0.002242
+    }
+  },
+  {
+    "code_name": "example_7",
+    "features": {
+      "loop_count": 3,
+      "func_calls": 8,
+      "instr_count": 50,
+      "has_branch": 1,
+      "uses_memory": 1,
+      "uses_global": 0
+    },
+    "detailed_features": {
+      "loop_count": 3,
+      "loop_unroll_potential": 0,
+      "func_calls": 8,
+      "inlining_potential": 1,
+      "instr_count": 50,
+      "has_branch": 1,
+      "mem2reg_potential": 4,
+      "uses_memory": 1,
+      "uses_global": 0,
+      "const_folding_potential": 2,
+      "dce_potential": 0
+    },
+    "best_optimization": "O3",
+    "timestamp": "2025-06-22T03:48:36.683010",
+    "optimization_results": {
+      "O0": 0.003337,
+      "O1": 0.002312,
+      "O2": 0.001875,
+      "O3": 0.001827,
+      "Os": 0.002247,
+      "Oz": 0.002917
+    }
+  },
+  {
+    "code_name": "example_8",
+    "features": {
+      "loop_count": 3,
+      "func_calls": 8,
+      "instr_count": 50,
+      "has_branch": 1,
+      "uses_memory": 1,
+      "uses_global": 0
+    },
+    "detailed_features": {
+      "loop_count": 3,
+      "loop_unroll_potential": 0,
+      "func_calls": 8,
+      "inlining_potential": 1,
+      "instr_count": 50,
+      "has_branch": 1,
+      "mem2reg_potential": 4,
+      "uses_memory": 1,
+      "uses_global": 0,
+      "const_folding_potential": 2,
+      "dce_potential": 0
+    },
+    "best_optimization": "O2",
+    "timestamp": "2025-06-22T03:48:39.122776",
+    "optimization_results": {
+      "O0": 0.003123,
+      "O1": 0.002576,
+      "O2": 0.001918,
+      "O3": 0.002133,
+      "Os": 0.00222,
+      "Oz": 0.003079
+    }
+  },
+  {
+    "code_name": "example_9",
+    "features": {
+      "loop_count": 3,
+      "func_calls": 8,
+      "instr_count": 50,
+      "has_branch": 1,
+      "uses_memory": 1,
+      "uses_global": 0
+    },
+    "detailed_features": {
+      "loop_count": 3,
+      "loop_unroll_potential": 0,
+      "func_calls": 8,
+      "inlining_potential": 1,
+      "instr_count": 50,
+      "has_branch": 1,
+      "mem2reg_potential": 4,
+      "uses_memory": 1,
+      "uses_global": 0,
+      "const_folding_potential": 2,
+      "dce_potential": 0
+    },
+    "best_optimization": "Os",
+    "timestamp": "2025-06-22T03:48:41.425693",
+    "optimization_results": {
+      "O0": 0.002665,
+      "O1": 0.002336,
+      "O2": 0.00244,
+      "O3": 0.002971,
+      "Os": 0.001956,
+      "Oz": 0.002339
+    }
+  },
+  {
+    "code_name": "example_10",
+    "features": {
+      "loop_count": 3,
+      "func_calls": 8,
+      "instr_count": 50,
+      "has_branch": 1,
+      "uses_memory": 1,
+      "uses_global": 0
+    },
+    "detailed_features": {
+      "loop_count": 3,
+      "loop_unroll_potential": 0,
+      "func_calls": 8,
+      "inlining_potential": 1,
+      "instr_count": 50,
+      "has_branch": 1,
+      "mem2reg_potential": 4,
+      "uses_memory": 1,
+      "uses_global": 0,
+      "const_folding_potential": 2,
+      "dce_potential": 0
+    },
+    "best_optimization": "Oz",
+    "timestamp": "2025-06-22T03:48:43.641413",
+    "optimization_results": {
+      "O0": 0.003266,
+      "O1": 0.004035,
+      "O2": 0.002118,
+      "O3": 0.001988,
+      "Os": 0.002853,
+      "Oz": 0.001865
+    }
+  },
+  {
+    "code_name": "example_11",
+    "features": {
+      "loop_count": 3,
+      "func_calls": 8,
+      "instr_count": 50,
+      "has_branch": 1,
+      "uses_memory": 1,
+      "uses_global": 0
+    },
+    "detailed_features": {
+      "loop_count": 3,
+      "loop_unroll_potential": 0,
+      "func_calls": 8,
+      "inlining_potential": 1,
+      "instr_count": 50,
+      "has_branch": 1,
+      "mem2reg_potential": 4,
+      "uses_memory": 1,
+      "uses_global": 0,
+      "const_folding_potential": 2,
+      "dce_potential": 0
+    },
+    "best_optimization": "O0",
+    "timestamp": "2025-06-22T03:48:45.810123",
+    "optimization_results": {
+      "O0": 0.001904,
+      "O1": 0.00267,
+      "O2": 0.002359,
+      "O3": 0.002138,
+      "Os": 0.001991,
+      "Oz": 0.002212
     }
   }
 ]

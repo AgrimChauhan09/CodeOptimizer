@@ -11,6 +11,7 @@ from utils.feature_extractor import extract_features_from_ir
 from utils.model_predictor import predict_optimization_pass
 from utils.enhanced_model_trainer import EnhancedModelTrainer
 from utils.dataset_manager import DatasetManager
+from utils.cache_manager import OptimizationCache
 
 # Configure logging
 logging.basicConfig(level=logging.DEBUG)
@@ -22,14 +23,16 @@ app.secret_key = os.environ.get("SESSION_SECRET", "default_secret_key")
 # Initialize the enhanced training system
 model_trainer = EnhancedModelTrainer()
 dataset_manager = DatasetManager()
+optimization_cache = OptimizationCache()
 
-# Train the model on startup with existing dataset
+# Initialize with enhanced default model for immediate functionality
 try:
-    model_trainer.train_model_from_dataset()
-    logger.info("Model training completed successfully")
-except Exception as e:
-    logger.warning(f"Model training failed: {str(e)}, using enhanced default model")
+    logger.info("Initializing enhanced optimization system...")
     model_trainer.create_enhanced_default_model()
+    logger.info("Optimization system ready")
+except Exception as e:
+    logger.error(f"Failed to initialize optimization system: {str(e)}")
+    raise
 
 # Example C code for demonstration - using a matrix multiplication example instead of Fibonacci
 EXAMPLE_C_CODE = '''
@@ -84,6 +87,15 @@ def optimize():
         if not c_code:
             return jsonify({'error': 'No code provided'}), 400
         
+        # Check if this code has been optimized before
+        cached_result = optimization_cache.get_cached_result(c_code)
+        if cached_result:
+            cached_data = cached_result['result']
+            cached_data['cached'] = True
+            cached_data['optimization_message'] = "This code has already been optimized. Using cached results for consistency."
+            logger.info("Returning cached optimization result")
+            return jsonify(cached_data)
+        
         # Generate unique ID for this optimization run
         run_id = str(uuid.uuid4())
         
@@ -119,23 +131,48 @@ def optimize():
             # Predict best optimization pass
             predicted_pass = predict_optimization_pass(basic_features)
             
-            # Measure execution time without optimization
+            # Measure execution time without optimization (baseline)
             unoptimized_exe = compile_c_with_optimization(c_file_path, temp_dir, "O0")
+            if not unoptimized_exe:
+                return jsonify({'error': 'Failed to compile unoptimized version'}), 500
+            
             unoptimized_time = measure_execution_time(unoptimized_exe)
+            if unoptimized_time <= 0:
+                return jsonify({'error': 'Failed to measure unoptimized execution time'}), 500
             
-            # Measure execution time with predicted optimization
-            optimized_exe = compile_c_with_optimization(c_file_path, temp_dir, predicted_pass)
-            optimized_time = measure_execution_time(optimized_exe)
+            # Test multiple optimization levels to find the actual best one
+            optimization_results = {}
+            for opt_level in ["O1", "O2", "O3", "Os", "Oz"]:
+                opt_exe = compile_c_with_optimization(c_file_path, temp_dir, opt_level)
+                if opt_exe:
+                    opt_time = measure_execution_time(opt_exe)
+                    if opt_time > 0:
+                        optimization_results[opt_level] = opt_time
             
-            # Check if optimization actually improved performance
-            optimization_message = ""
-            if optimized_time >= unoptimized_time:
-                optimization_message = "No performance improvement detected. Code may already be optimal."
-                time_improvement = 0.0
-            else:
-                # Calculate improvement percentage
+            if not optimization_results:
+                return jsonify({'error': 'Failed to compile any optimized versions'}), 500
+            
+            # Find the actual best optimization level
+            best_opt_level = min(optimization_results.keys(), key=lambda x: optimization_results[x])
+            best_opt_time = optimization_results[best_opt_level]
+            
+            # Use the actual best optimization instead of predicted
+            optimized_time = best_opt_time
+            actual_best_optimization = best_opt_level
+            
+            # Calculate improvement with proper validation
+            if optimized_time < unoptimized_time:
                 time_improvement = ((unoptimized_time - optimized_time) / unoptimized_time) * 100
-                optimization_message = f"Performance improved by {time_improvement:.2f}%"
+                optimization_message = f"Performance improved by {time_improvement:.2f}% with {actual_best_optimization} optimization"
+            elif optimized_time == unoptimized_time:
+                time_improvement = 0.0
+                optimization_message = "No performance improvement detected. Code may already be optimal."
+            else:
+                # This shouldn't happen with proper measurement, but handle gracefully
+                time_improvement = 0.0
+                optimization_message = "Optimization did not improve performance. Using unoptimized version."
+                optimized_time = unoptimized_time
+                actual_best_optimization = "O0"
             
             # Read the IR code for display
             with open(ir_file_path, 'r') as f:
@@ -185,15 +222,17 @@ def optimize():
                         'potential': detailed_features.get('dce_potential', 0)
                     })
             
-            # Prepare result
+            # Prepare result with actual best optimization
             result = {
                 'unoptimized_time': f"{unoptimized_time:.6f}",
                 'optimized_time': f"{optimized_time:.6f}",
-                'best_optimization': predicted_pass,
+                'best_optimization': actual_best_optimization,
+                'predicted_optimization': predicted_pass,
                 'time_improvement': f"{time_improvement:.2f}%",
                 'optimization_message': optimization_message,
                 'llvm_ir': ir_code_content,
                 'optimization_details': optimization_details,
+                'optimization_results': optimization_results,
                 'features': {
                     'loop_count': basic_features[0],
                     'func_calls': basic_features[1],
@@ -201,8 +240,12 @@ def optimize():
                     'has_branch': basic_features[3],
                     'uses_memory': basic_features[4],
                     'uses_global': basic_features[5]
-                }
+                },
+                'cached': False
             }
+            
+            # Cache the result to prevent inconsistent outputs on resubmission
+            optimization_cache.cache_result(c_code, result)
             
             return jsonify(result)
             
