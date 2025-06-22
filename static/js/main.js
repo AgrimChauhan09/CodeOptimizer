@@ -180,68 +180,74 @@ document.addEventListener('DOMContentLoaded', function() {
         // Display LLVM IR
         irViewer.setValue(data.llvm_ir || 'No LLVM IR available');
         
-        // Display optimization details if available
-        if (data.optimization_details && data.optimization_details.length > 0) {
-            // Create or update optimization details section
-            let detailsSection = document.getElementById('optimization-details');
-            if (!detailsSection) {
-                // Create the container if it doesn't exist
-                const detailsContainer = document.createElement('div');
-                detailsContainer.classList.add('card', 'mb-4');
-                detailsContainer.innerHTML = `
-                    <div class="card-header bg-dark text-white">
-                        <h5 class="mb-0">Optimization Techniques</h5>
+        // Display optimization details if available (only for non-cached results)
+        if (data.optimization_details && data.optimization_details.length > 0 && !data.cached) {
+            // Remove any existing optimization details section first
+            const existingDetailsSection = document.getElementById('optimization-details-section');
+            if (existingDetailsSection) {
+                existingDetailsSection.remove();
+            }
+            
+            // Create the container
+            const detailsContainer = document.createElement('div');
+            detailsContainer.classList.add('card', 'mb-4');
+            detailsContainer.id = 'optimization-details-section';
+            detailsContainer.innerHTML = `
+                <div class="card-header bg-gradient text-white" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+                    <h5 class="mb-0">
+                        <i data-feather="zap"></i> Optimization Techniques Applied
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead class="table-dark">
+                                <tr>
+                                    <th>Technique</th>
+                                    <th>Benefit</th>
+                                    <th>Potential Impact</th>
+                                </tr>
+                            </thead>
+                            <tbody id="optimization-details-body"></tbody>
+                        </table>
                     </div>
-                    <div class="card-body">
-                        <div class="table-responsive">
-                            <table class="table table-striped">
-                                <thead>
-                                    <tr>
-                                        <th>Technique</th>
-                                        <th>Benefit</th>
-                                        <th>Potential</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="optimization-details-body"></tbody>
-                            </table>
-                        </div>
-                    </div>
-                `;
-                
-                // Find where to insert - before the features card
-                const featuresCard = document.querySelector('.table-responsive').closest('.card');
-                if (featuresCard && featuresCard.parentNode) {
-                    featuresCard.parentNode.insertBefore(detailsContainer, featuresCard);
-                } else {
-                    // Fallback - add to the results content area
-                    document.getElementById('results-content').appendChild(detailsContainer);
-                }
-                
-                detailsSection = detailsContainer;
+                </div>
+            `;
+            
+            // Find where to insert - before the features card
+            const featuresCard = document.querySelector('#features-table').closest('.card');
+            if (featuresCard && featuresCard.parentNode) {
+                featuresCard.parentNode.insertBefore(detailsContainer, featuresCard);
+            } else {
+                // Fallback - add to the results content area
+                document.getElementById('results-content').appendChild(detailsContainer);
             }
             
             // Populate the optimization details
-            const detailsBody = document.getElementById('optimization-details-body') || 
-                               detailsSection.querySelector('tbody');
-            detailsBody.innerHTML = '';
+            const detailsBody = document.getElementById('optimization-details-body');
             
             data.optimization_details.forEach(detail => {
                 const row = document.createElement('tr');
+                const potentialColor = detail.potential >= 8 ? 'success' : detail.potential >= 5 ? 'warning' : 'info';
                 row.innerHTML = `
-                    <td><strong>${detail.name}</strong></td>
-                    <td>${detail.benefit}</td>
+                    <td><strong><i data-feather="cpu"></i> ${detail.name}</strong></td>
+                    <td><span class="text-muted">${detail.benefit}</span></td>
                     <td>
-                        <div class="progress">
-                            <div class="progress-bar bg-info" role="progressbar" 
+                        <div class="progress" style="height: 20px;">
+                            <div class="progress-bar bg-${potentialColor} progress-bar-striped progress-bar-animated" 
+                                 role="progressbar" 
                                  style="width: ${Math.min(detail.potential * 10, 100)}%" 
                                  aria-valuenow="${detail.potential}" aria-valuemin="0" aria-valuemax="10">
-                                ${detail.potential}
+                                ${detail.potential}/10
                             </div>
                         </div>
                     </td>
                 `;
                 detailsBody.appendChild(row);
             });
+            
+            // Re-initialize feather icons
+            feather.replace();
         }
         
         // Populate features table
