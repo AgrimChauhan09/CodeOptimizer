@@ -1,5 +1,5 @@
 body {
-    background: #0d1117;
+    background: #657ea3;
     background-image: 
         radial-gradient(circle at 25% 25%, #1a1a2e 0%, transparent 50%),
         radial-gradient(circle at 75% 75%, #16213e 0%, transparent 50%);
@@ -11,7 +11,7 @@ body {
 }
 
 .container-fluid {
-    background: rgba(13, 17, 23, 0.8);
+    background: rgba(39, 117, 108, 0.8);
     margin: 10px;
     border-radius: 20px;
     padding: 20px;
@@ -41,7 +41,7 @@ body {
     border: 1px solid rgba(255, 255, 255, 0.1);
     overflow: hidden;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
-    background: rgba(22, 27, 34, 0.8);
+    background: #657ea3;
     backdrop-filter: blur(10px);
 }
 
@@ -64,7 +64,7 @@ body {
 }
 
 .card-body {
-    background: rgba(22, 27, 34, 0.9);
+    background: rgba(125, 175, 144, 0.9);
     color: #e6edf3;
 }
 
