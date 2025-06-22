@@ -916,5 +916,73 @@
       "Os": 0.002182,
       "Oz": 0.002299
     }
+  },
+  {
+    "code_name": "new1",
+    "features": {
+      "loop_count": 3,
+      "func_calls": 8,
+      "instr_count": 53,
+      "has_branch": 1,
+      "uses_memory": 1,
+      "uses_global": 0
+    },
+    "detailed_features": {
+      "loop_count": 3,
+      "loop_unroll_potential": 0,
+      "func_calls": 8,
+      "inlining_potential": 1,
+      "instr_count": 53,
+      "has_branch": 1,
+      "mem2reg_potential": 8,
+      "uses_memory": 1,
+      "uses_global": 0,
+      "const_folding_potential": 2,
+      "dce_potential": 0
+    },
+    "best_optimization": "O3",
+    "timestamp": "2025-06-22T22:06:59.139918",
+    "optimization_results": {
+      "O0": 0.002144,
+      "O1": 0.002174,
+      "O2": 0.001913,
+      "O3": 0.001784,
+      "Os": 0.002126,
+      "Oz": 0.002687
+    }
+  },
+  {
+    "code_name": "new2",
+    "features": {
+      "loop_count": 6,
+      "func_calls": 8,
+      "instr_count": 82,
+      "has_branch": 1,
+      "uses_memory": 1,
+      "uses_global": 0
+    },
+    "detailed_features": {
+      "loop_count": 6,
+      "loop_unroll_potential": 0,
+      "func_calls": 8,
+      "inlining_potential": 1,
+      "instr_count": 82,
+      "has_branch": 1,
+      "mem2reg_potential": 8,
+      "uses_memory": 1,
+      "uses_global": 0,
+      "const_folding_potential": 4,
+      "dce_potential": 0
+    },
+    "best_optimization": "O0",
+    "timestamp": "2025-06-22T22:07:27.885112",
+    "optimization_results": {
+      "O0": 0.001831,
+      "O1": 0.001926,
+      "O2": 0.002259,
+      "O3": 0.002614,
+      "Os": 0.002153,
+      "Oz": 0.002696
+    }
   }
 ]
